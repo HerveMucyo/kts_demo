@@ -55,3 +55,20 @@ body {
 .nav-content ul li:hover a {
     opacity: 0.8;
 }
+
+@media screen and (max-width: 768px) {
+    .logo-side {
+        padding: 0 10px;
+    }
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .nav-content ul {
+        flex-direction: column;
+        text-align: center;
+    }
+    .nav-content ul li {
+        margin: 10px 0;
+    }
+}
