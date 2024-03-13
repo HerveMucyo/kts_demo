@@ -49,6 +49,7 @@ body {
 
 .links {
     color: #fff;
+    font-size: large;
 }
 
 .nav-content ul li:hover a {
