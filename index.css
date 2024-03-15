@@ -234,6 +234,14 @@ body {
     color: #fff;
 }
 
+#forgotPasswordLink {
+    background: none;
+}
+
+#forgotPasswordLink:hover {
+    color: #007bff;
+}
+
 
 /* Your existing CSS styles */
 
