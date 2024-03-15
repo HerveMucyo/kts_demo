@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signupForm');
     const forgotPasswordForm = document.getElementById('forgotPasswordForm');
     const heroSection = document.querySelector('.hero');
-    const logo = document.querySelector('.logo-side a');
-    const homeLink = document.querySelector('a[href="#home"]');
+    const homeIcon = document.querySelector('.fa-home');
 
     // Function to hide all forms
     function hideAllForms() {
@@ -52,13 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
         heroSection.style.display = 'none'; // Hide hero section when mobile signup button is clicked
     });
 
-    logo.addEventListener('click', function() {
+    // Event listener for clicking on the home icon
+    homeIcon.addEventListener('click', function() {
         hideAllForms();
-        heroSection.style.display = 'block'; // Display hero section when logo is clicked
-    });
-
-    homeLink.addEventListener('click', function() {
-        hideAllForms();
-        heroSection.style.display = 'block'; // Display hero section when home link is clicked
+        heroSection.style.display = 'block'; // Display hero section when home icon is clicked
     });
 });
