@@ -18,7 +18,8 @@ body {
 }
 
 .logo-side img {
-    width: 100px;
+    width: 80px;
+    /* Adjust the width of the logo image */
     height: auto;
 }
 
@@ -71,4 +72,215 @@ body {
     .nav-content ul li {
         margin: 10px 0;
     }
+}
+
+.toggle-button {
+    padding: 0 20px;
+    /* Increase the right padding to add space */
+    display: none;
+    /* Initially hide the toggle button */
+    cursor: pointer;
+}
+
+.toggle-button span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin-bottom: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.mobile-nav {
+    display: none;
+    /*Initiallyhidethemobilenavigation*/
+    background-color: #223769;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+.mobile-nav.active {
+    display: block;
+    /* Display the mobile navigation when active */
+    z-index: 1;
+}
+
+.mobile-nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile-nav ul li {
+    margin: 20px 0;
+}
+
+.mobile-nav a {
+    color: #fff;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .toggle-button {
+        display: block;
+        /* Display the toggle button for small screens */
+    }
+    .nav-content {
+        display: none;
+        /* Hide the main navigation for small screens */
+    }
+    .mobile-nav {
+        display: none;
+        /* Initially hide the mobile navigation for small screens */
+    }
+    .mobile-nav.active {
+        display: block;
+        /* Display the mobile navigation when active */
+    }
+}
+
+
+/* Animations */
+
+.toggle-button span.active:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+    -webkit-transform: translateY(10px) rotate(45deg);
+    -moz-transform: translateY(10px) rotate(45deg);
+    -ms-transform: translateY(10px) rotate(45deg);
+    -o-transform: translateY(10px) rotate(45deg);
+}
+
+.toggle-button span.active:nth-child(2) {
+    opacity: 0;
+}
+
+.toggle-button span.active:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -moz-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg);
+    -o-transform: translateY(-10px) rotate(-45deg);
+}
+
+.form-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+.form-group a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+.links {
+    color: #fff;
+}
+
+
+/* Your existing CSS styles */
+
+
+/* New styles
+
+
+/* Your existing CSS styles */
+
+
+/* New styles for the hero section and card container */
+
+.hero {
+    background-color: #f2f2f2;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.card {
+    width: 250px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.card h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.card p {
+    margin-top: 5px;
+    font-size: 0.9em;
 }

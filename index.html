@@ -6,34 +6,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KTS</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
-    <nav>
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <div class="logo-side">
-                <a href="#home"><img src="./kts.png" alt="logo"></a>
+            <a class="navbar-brand" href="#">
+                <span class="fa fa-home"></span>&nbsp;Home
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-            </div>
-            <div class="nav-content">
-                <ul>
-                    <li>
-                        <a href="#Home" class="links">Home</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#Blog"></a>
                     </li>
-                    <li>
-                        <a href="#AboutUs" class="links">About Us</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#AboutUs">About Us</a>
                     </li>
-                    <li>
-                        <a href="#Services" class="links">Services</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Services">Services</a>
                     </li>
-                    <li>
-                        <a href="#ContactUs" class="links">Contact Us</a></li>
-                    <li class="login-side">
-                        <a href="#" class="links">Login / Register</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ContactUs">Contact Us</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Login / Sign Up
+                </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#" id="loginBtn">Login</a>
+                            <a class="dropdown-item" href="#" id="signupBtn">Sign Up</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="#Home" class="links">Blog</a></li>
+            <li><a href="#AboutUs" class="links">About Us</a></li>
+            <li><a href="#Services" class="links">Services</a></li>
+            <li><a href="#ContactUs" class="links">Contact Us</a></li>
+            <li class="login-side"><button id="mobileLoginBtn" class="btn">Login</button></li>
+            <li class="login-side"><button id="mobileSignupBtn" class="btn">Sign Up</button></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Discover my latest projects and achievements.</p>
+            <a href="#AboutUs" class="btn">Learn More</a>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <img src="./kts.png" alt="Placeholder image">
+                <h3>Project 1</h3>
+                <p>Description of Project 1</p>
+            </div>
+            <div class="card">
+                <img src="./kts.png" alt="Placeholder image">
+                <h3>Project 2</h3>
+                <p>Description of Project 2</p>
+            </div>
+            <div class="card">
+                <img src="./kts.png" alt="Placeholder image">
+                <h3>Project 3</h3>
+                <p>Description of Project 3</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="loginForm" class="form-container">
+        <h2>Login</h2>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="form-group">
+                <a href="#" id="forgotPasswordLink" class="btn btn-secondary">Forgot password?</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="signupForm" class="form-container" style="display: none;">
+        <h2>Sign Up</h2>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="newUsername">Username</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Password</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgotPasswordForm" class="form-container" style="display: none;">
+        <h2>Forgot Password</h2>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="forgotEmail">Email</label>
+                <input type="email" id="forgotEmail" name="forgotEmail" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./index.js"></script>
 </body>
 
 </html>
