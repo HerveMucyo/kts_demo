@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles */
+        
+        .sidebar {
+            background-color: #333;
+            color: white;
+            transition: transform 0.3s ease-in-out;
+            z-index: 50;
+        }
+        
+        .sidebar a {
+            color: white;
+        }
+        
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        
+        .sidebar .close-icon {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            cursor: pointer;
+        }
+        
+        .page {
+            padding: 20px;
+            margin-left: 64px;
+            /* Adjusted for sidebar width */
+        }
+        
+        .hidden {
+            display: none;
+        }
+        /* Custom styles for logo */
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+        /* Dashboard component */
+        
+        .dashboard-component {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        /* Chart container */
+        
+        .chart-container {
+            width: 100%;
+            max-width: calc(100% - 40px);
+            /* Adjusted for padding */
+            margin: 0 auto;
+        }
+        /* Table styles */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        /* Button styles */
+        
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        /* Toggle button styles */
+        
+        #toggleSidebarButton {
+            margin: 10px;
+            padding: 8px;
+        }
+        /* Responsive styles */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.transform {
+                transform: translateX(0);
+            }
+            .flex {
+                flex-direction: column;
+            }
+            .dashboard-component {
+                padding: 10px;
+                margin-left: 0;
+                /* Adjusted for small screens */
+            }
+            .page {
+                padding: 10px;
+                /* Adjusted for small screens */
+            }
+            .chart-container {
+                max-width: calc(100% - 20px);
+                /* Adjusted for small screens */
+            }
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar h-screen fixed top-0 left-0 flex flex-col justify-between transform -translate-x-full w-64">
+        <!-- Logo -->
+        <div class="flex items-center justify-center py-4">
+            <div class="logo">
+                <img src="your-logo.png" alt="Logo">
+            </div>
+        </div>
+        <!-- Navigation links -->
+        <ul class="flex-1">
+            <li>
+                <a href="#" class="sidebar-link flex items-center p-4" data-page="dashboardPage">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link flex items-center p-4" data-page="usersPage">
+                    <i class="fas fa-user mr-3"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link flex items-center p-4" data-page="productsPage">
+                    <i class="fas fa-cube mr-3"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link flex items-center p-4" data-page="customersPage">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link flex items-center p-4" data-page="signOutPage">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    <span>Sign Out</span>
+                </a>
+            </li>
+        </ul>
+        <!-- Close button -->
+        <div class="close-icon text-white p-4">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="flex">
+        <!-- Sidebar toggle button -->
+        <button id="toggleSidebarButton" class="flex items-center justify-center w-12 h-12 text-white bg-gray-800 hover:bg-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800 focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- Main content -->
+        <div class="flex-1">
+            <!-- Dashboard page -->
+            <div id="dashboardPage" class="page">
+                <div class="dashboard-component">
+                    <h1 class="text-xl font-semibold mb-2">Dashboard</h1>
+                    <!-- Analytics charts/graphs -->
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="userChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Users page -->
+            <div id="usersPage" class="page hidden">
+                <div class="dashboard-component">
+                    <h1 class="text-xl font-semibold mb-2">Users</h1>
+                    <!-- Add button -->
+                    <button class="btn btn-primary mb-2" id="addUserBtn">Add User</button>
+                    <!-- Users table -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- User data rows -->
+                            <tr>
+                                <td>1</td>
+                                <td>Mucyo Herve</td>
+                                <td>mucyoh32@gmail.com</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Herve Mucyo</td>
+                                <td>hmucyo122@daviscollege.com</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Axel Mugisha</td>
+                                <td>user@example.com</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Products page -->
+            <div id="productsPage" class="page hidden">
+                <div class="dashboard-component">
+                    <h1 class="text-xl font-semibold mb-2">Products</h1>
+                    <!-- Add button -->
+                    <button class="btn btn-primary mb-2" id="addProductBtn">Add Product</button>
+                    <!-- Products table -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Product data rows -->
+                            <tr>
+                                <td>1</td>
+                                <td>Earbuds</td>
+                                <td>$50</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Apple series watch</td>
+                                <td>$50</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Macbook Air</td>
+                                <td>$50</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Customers page -->
+            <div id="customersPage" class="page hidden">
+                <div class="dashboard-component">
+                    <h1 class="text-xl font-semibold mb-2">Customers</h1>
+                    <!-- Add button -->
+                    <button class="btn btn-primary mb-2" id="addCustomerBtn">Add Customer</button>
+                    <!-- Customers table -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Customer data rows -->
+                            <tr>
+                                <td>1</td>
+                                <td>Herve MUCYO</td>
+                                <td>mucyoh32@gmail.com</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Mugisha Axel</td>
+                                <td>mugisha023@gmail.com</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Herve MUCYO</td>
+                                <td>mucyoh32@gmail.com</td>
+                                <td>
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Sign Out page -->
+            <div id="signOutPage" class="page hidden">
+                <div class="dashboard-component">
+                    <h1 class="text-xl font-semibold mb-2">Sign Out</h1>
+                    <p>Are you sure you want to sign out?</p>
+                    <!-- Sign Out button -->
+                    <button class="btn btn-danger">Sign Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for charts/graphs
+        const salesData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: [65, 59, 80, 81, 56, 55, 40]
+            }]
+        };
+
+        const userData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Users',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: [18, 24, 36, 48, 30, 40, 55]
+            }]
+        };
+
+        // Initialize charts
+        const salesChartCanvas = document.getElementById('salesChart').getContext('2d');
+        const userChartCanvas = document.getElementById('userChart').getContext('2d');
+
+        new Chart(salesChartCanvas, {
+            type: 'line',
+            data: salesData,
+            options: {}
+        });
+
+        new Chart(userChartCanvas, {
+            type: 'bar',
+            data: userData,
+            options: {}
+        });
+
+        // Sidebar functionality
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebarButton = document.getElementById('toggleSidebarButton');
+        const closeIcon = document.querySelector('.close-icon');
+
+        toggleSidebarButton.addEventListener('click', () => {
+            sidebar.classList.toggle('transform');
+        });
+
+        closeIcon.addEventListener('click', () => {
+            sidebar.classList.toggle('transform');
+        });
+
+        // Navigation links functionality
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const pages = document.querySelectorAll('.page');
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPageId = link.getAttribute('data-page');
+                pages.forEach(page => {
+                    if (page.id === targetPageId) {
+                        page.classList.remove('hidden');
+                    } else {
+                        page.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Add user button functionality
+        const addUserBtn = document.getElementById('addUserBtn');
+        addUserBtn.addEventListener('click', () => {
+            // Add your logic here to handle adding a user
+            console.log('Add user clicked');
+        });
+
+        // Add product button functionality
+        const addProductBtn = document.getElementById('addProductBtn');
+        addProductBtn.addEventListener('click', () => {
+            // Add your logic here to handle adding a product
+            console.log('Add product clicked');
+        });
+
+        // Add customer button functionality
+        const addCustomerBtn = document.getElementById('addCustomerBtn');
+        addCustomerBtn.addEventListener('click', () => {
+            // Add your logic here to handle adding a customer
+            console.log('Add customer clicked');
+        });
+    </script>
+</body>
+
+</html>

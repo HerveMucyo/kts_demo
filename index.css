@@ -280,3 +280,39 @@ body {
     margin-top: 5px;
     font-size: 0.9em;
 }
+
+
+/* Your existing CSS styles */
+
+
+/* Additional CSS styles for dashboard layout */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #343a40;
+    padding-top: 50px;
+    color: #fff;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.navbar {
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-link {
+    color: #fff !important;
+}
