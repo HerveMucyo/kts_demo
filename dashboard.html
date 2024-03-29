@@ -14,8 +14,9 @@
         .sidebar {
             background-color: #333;
             color: white;
-            transition: transform 0.3s ease-in-out;
             z-index: 50;
+            width: 250px;
+            /* Fixed width for sidebar */
         }
         
         .sidebar a {
@@ -35,7 +36,7 @@
         
         .page {
             padding: 20px;
-            margin-left: 64px;
+            margin-left: 250px;
             /* Adjusted for sidebar width */
         }
         
@@ -135,16 +136,9 @@
             .sidebar.transform {
                 transform: translateX(0);
             }
-            .flex {
-                flex-direction: column;
-            }
-            .dashboard-component {
-                padding: 10px;
-                margin-left: 0;
-                /* Adjusted for small screens */
-            }
             .page {
                 padding: 10px;
+                margin-left: 0;
                 /* Adjusted for small screens */
             }
             .chart-container {
@@ -160,11 +154,11 @@
 
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar h-screen fixed top-0 left-0 flex flex-col justify-between transform -translate-x-full w-64">
+    <div id="sidebar" class="sidebar h-screen fixed top-0 left-0 flex flex-col justify-between transform -translate-x-full">
         <!-- Logo -->
         <div class="flex items-center justify-center py-4">
             <div class="logo">
-                <img src="your-logo.png" alt="Logo">
+                <img src="./profile2.jpg" alt="Logo">
             </div>
         </div>
         <!-- Navigation links -->
@@ -247,26 +241,8 @@
                             <!-- User data rows -->
                             <tr>
                                 <td>1</td>
-                                <td>Mucyo Herve</td>
-                                <td>mucyoh32@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Herve Mucyo</td>
-                                <td>hmucyo122@daviscollege.com</td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Axel Mugisha</td>
-                                <td>user@example.com</td>
+                                <td>John Doe</td>
+                                <td>john@example.com</td>
                                 <td>
                                     <button class="btn btn-success">Edit</button>
                                     <button class="btn btn-danger">Delete</button>
@@ -304,25 +280,6 @@
                                     <button class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Apple series watch</td>
-                                <td>$50</td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Macbook Air</td>
-                                <td>$50</td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>
@@ -348,26 +305,8 @@
                             <!-- Customer data rows -->
                             <tr>
                                 <td>1</td>
-                                <td>Herve MUCYO</td>
-                                <td>mucyoh32@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Mugisha Axel</td>
-                                <td>mugisha023@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-success">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Herve MUCYO</td>
-                                <td>mucyoh32@gmail.com</td>
+                                <td>John Doe</td>
+                                <td>john@example.com</td>
                                 <td>
                                     <button class="btn btn-success">Edit</button>
                                     <button class="btn btn-danger">Delete</button>
@@ -384,52 +323,13 @@
                     <h1 class="text-xl font-semibold mb-2">Sign Out</h1>
                     <p>Are you sure you want to sign out?</p>
                     <!-- Sign Out button -->
-                    <button class="btn btn-danger">Sign Out</button>
+                    <button class="btn btn-danger"><a href="./index.html">Sign Out</a></button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample data for charts/graphs
-        const salesData = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            datasets: [{
-                label: 'Sales',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                data: [65, 59, 80, 81, 56, 55, 40]
-            }]
-        };
-
-        const userData = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            datasets: [{
-                label: 'Users',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-                data: [18, 24, 36, 48, 30, 40, 55]
-            }]
-        };
-
-        // Initialize charts
-        const salesChartCanvas = document.getElementById('salesChart').getContext('2d');
-        const userChartCanvas = document.getElementById('userChart').getContext('2d');
-
-        new Chart(salesChartCanvas, {
-            type: 'line',
-            data: salesData,
-            options: {}
-        });
-
-        new Chart(userChartCanvas, {
-            type: 'bar',
-            data: userData,
-            options: {}
-        });
-
         // Sidebar functionality
         const sidebar = document.getElementById('sidebar');
         const toggleSidebarButton = document.getElementById('toggleSidebarButton');
@@ -480,6 +380,45 @@
         addCustomerBtn.addEventListener('click', () => {
             // Add your logic here to handle adding a customer
             console.log('Add customer clicked');
+        });
+
+        // Sample data for charts/graphs
+        const salesData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: [65, 59, 80, 81, 56, 55, 40]
+            }]
+        };
+
+        const userData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Users',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: [18, 24, 36, 48, 30, 40, 55]
+            }]
+        };
+
+        // Initialize charts
+        const salesChartCanvas = document.getElementById('salesChart').getContext('2d');
+        const userChartCanvas = document.getElementById('userChart').getContext('2d');
+
+        new Chart(salesChartCanvas, {
+            type: 'line',
+            data: salesData,
+            options: {}
+        });
+
+        new Chart(userChartCanvas, {
+            type: 'bar',
+            data: userData,
+            options: {}
         });
     </script>
 </body>
