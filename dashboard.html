@@ -149,10 +149,113 @@
                 font-size: 12px;
             }
         }
+        /* Navbar styles */
+        
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-menu-item {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        
+        .navbar-menu-item:hover {
+            text-decoration: underline;
+        }
+        /* Notification styles */
+        
+        .notification {
+            position: relative;
+            cursor: pointer;
+            margin-right: 20px;
+            /* Added margin between notification and profile */
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+        /* Profile dropdown styles */
+        
+        .profile-dropdown {
+            position: relative;
+        }
+        
+        .profile-dropdown-menu {
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: none;
+        }
+        
+        .profile-dropdown-menu.show {
+            display: block;
+        }
+        
+        .profile-dropdown-menu-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            color: black;
+            /* Set link color to black */
+        }
+        
+        .profile-dropdown-menu-item:hover {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-brand">Dashboard</div>
+        <div class="navbar-menu">
+            <div class="notification">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="profile-dropdown">
+                <div class="profile-dropdown-toggle">
+                    <img src="./profile2.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+                <div class="profile-dropdown-menu">
+                    <div class="profile-dropdown-menu-item">Profile</div>
+                    <div class="profile-dropdown-menu-item">Settings</div>
+                    <div class="profile-dropdown-menu-item">Logout</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar h-screen fixed top-0 left-0 flex flex-col justify-between transform -translate-x-full">
         <!-- Logo -->
@@ -359,6 +462,14 @@
                     }
                 });
             });
+        });
+
+        // Profile dropdown functionality
+        const profileDropdownToggle = document.querySelector('.profile-dropdown-toggle');
+        const profileDropdownMenu = document.querySelector('.profile-dropdown-menu');
+
+        profileDropdownToggle.addEventListener('click', () => {
+            profileDropdownMenu.classList.toggle('show');
         });
 
         // Add user button functionality
